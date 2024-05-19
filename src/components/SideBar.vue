@@ -31,13 +31,4 @@ export default {
 }
 </script>
 
-<style>
-.sidebar-container {
-  height: calc(100% - 30px);
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  background-color: red;
-  padding: 15px 20px;
-}
-</style>
+

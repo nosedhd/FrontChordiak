@@ -1,7 +1,5 @@
 <template>
-  <!-- <div class="chord-hexagon-container">
-</div> -->
-  <button>
+  <button @click="playSound">
     <span>{{ number }}</span>
   </button>
 </template>
@@ -14,18 +12,15 @@ export default {
     // Selectors
   },
   data() {
-    return {
-      //   selected: 'A'
-    }
+    return {}
   },
   methods: {
-    // async fetchData() {
-    //   // Aquí puedes usar 'await'
-    // }
+    playSound() {
+      const audio = new Audio(`/sounds/${this.number}.wav`)
+      audio.play()
+    }
   },
-  mounted() {
-    // this.fetchData()
-  }
+  mounted() {}
 }
 </script>
 
@@ -34,20 +29,35 @@ export default {
 }
 
 button {
+  transform: rotate(45deg);
   color: aliceblue;
-  width: 16%;
+  width: 110px;
   height: 110px;
-  background-image: url('../../public/hexagono.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: white;
+  border-radius: 30px;
   padding: 0;
   padding-block: 0px;
   padding-inline: 0px;
-
-  background-color: transparent;
-  border: none;
+  border: 5px solid black;
   cursor: pointer;
+  margin: 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+button > span {
+  transform: rotate(-90deg);
+  display: inline-block;
+  width: 95%;
+  height: 95%;
+  background-color: black;
+  border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* .chord-hexagon-container button > img {
   width: 100%;

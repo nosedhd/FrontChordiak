@@ -10,7 +10,6 @@ import HomeView from './views/HomeView.vue'
   <RouterView /> -->
   </div>
 </template>
-
 <style scoped>
 .container-app {
   width: 80vw;

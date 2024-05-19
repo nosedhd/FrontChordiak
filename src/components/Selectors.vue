@@ -1,49 +1,50 @@
 <template>
   <div class="selectors-container">
     <div class="selectors">
-      <select name="nota" id="nota">
-        <option value="A">Nota Musical</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="F">F</option>
+      <select name="nota" id="nota" v-model="tonica">
+        <option disabled>Nota Musical</option>
+        <option v-for="note in notes" :key="note.id" :value="note.id">
+          {{ note.name }}
+        </option>
       </select>
       <select name="escala" id="escala">
-        <option value="A">Escala</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="F">F</option>
+        <option disabled>Escala</option>
+        <option v-for="escala in scales" :key="escala.value" :value="escala.value">
+          {{ escala.name }}
+        </option>
       </select>
       <select name="idioma" id="idioma">
-        <option value="A">Idioma</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="F">F</option>
+        <option disabled>Selecciona un idioma</option>
+        <option v-for="language in languages" :key="language.value" :value="language.value">
+          {{ language.name }}
+        </option>
       </select>
     </div>
   </div>
 </template>
 
 <script>
+// import { useNotesStore } from '../stores/notes'
+// const store = useNotesStore()
+import axios from 'axios'
+
 export default {
   name: 'Selectors',
   data() {
     return {
-      selected: 'A'
+      notes: [],
+      tonica: ''
     }
   },
   methods: {
-    // async fetchData() {
-    //   // Aquí puedes usar 'await'
-    // }
+    async fetchData() {
+      axios.get('http://127.0.0.1:8000/api/notas').then((response) => {
+        this.notes = response.data
+      })
+    }
   },
   mounted() {
-    // this.fetchData()
+    this.fetchData()
   }
 }
 </script>
