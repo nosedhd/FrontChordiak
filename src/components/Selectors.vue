@@ -27,6 +27,7 @@
 // import { useNotesStore } from '../stores/notes'
 // const store = useNotesStore()
 import axios from 'axios'
+import { useNotesStore } from '../stores/notes';
 
 export default {
   name: 'Selectors',
@@ -41,7 +42,11 @@ export default {
       axios.get('http://127.0.0.1:8000/api/notas').then((response) => {
         this.notes = response.data
       })
-    }
+    },
+    setSelectedEscaleId(escala) {
+      const store = useNotesStore();
+      store.setSelectedEscaleId(escala.id);
+    },
   },
   mounted() {
     this.fetchData()

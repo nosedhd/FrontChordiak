@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { useNotesStore } from '../stores/notes';
 export default {
   props: ['number'],
   name: 'ChordHexagon',
@@ -14,10 +16,28 @@ export default {
   data() {
     return {}
   },
+  setup() {
+    const store = useNotesStore();
+    const escaleId = store.escaleId;
+    return {
+      escaleId
+    };
+  },
   methods: {
+    sendIndex(chordIndex, escaleId){
+      axios.post('/global-scales', { chordIndex, escaleId })
+      .then(response => {
+        console.log('chordIndex:', response.chordIndex);
+        console.log('escaleId:', response.escaleId);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    },
     playSound() {
       const audio = new Audio(`/sounds/${this.number}.wav`)
       audio.play()
+      this.sendIndex(this.number);
     }
   },
   mounted() {}
