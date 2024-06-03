@@ -6,11 +6,11 @@ import { defineStore } from 'pinia'
 export const useNotesStore = defineStore({
   id: 'main',
   state: () => ({
-    escaleId: '',
+    scaleId: '',
   }),
   actions: {
-    setSelectedEscaleId(id) {
-    this.escaleId = id;
+    setSelectedScaleId(id) {
+    this.scaleId = id;
     },
   },
 });

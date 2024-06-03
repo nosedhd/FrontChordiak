@@ -43,9 +43,9 @@ export default {
         this.notes = response.data
       })
     },
-    setSelectedEscaleId(escala) {
+    setSelectedScaleId(escala) {
       const store = useNotesStore();
-      store.setSelectedEscaleId(escala.id);
+      store.setSelectedScaleId(escala.id);
     },
   },
   mounted() {

@@ -18,17 +18,17 @@ export default {
   },
   setup() {
     const store = useNotesStore();
-    const escaleId = store.escaleId;
+    const scaleId = store.scaleId;
     return {
-      escaleId
+      scaleId
     };
   },
   methods: {
-    sendIndex(chordIndex, escaleId){
-      axios.post('/global-scales', { chordIndex, escaleId })
+    sendIndex(chordIndex, scaleId){
+      axios.post('http://localhost:5173/global-scales', { chordIndex, scaleId })
       .then(response => {
         console.log('chordIndex:', response.chordIndex);
-        console.log('escaleId:', response.escaleId);
+        console.log('scaleId:', response.scaleId);
       })
       .catch(error => {
         console.error(error);
