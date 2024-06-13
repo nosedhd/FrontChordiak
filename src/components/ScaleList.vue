@@ -50,7 +50,7 @@ export default {
 
 <style>
 .scale-list-container {
-  /* width: 100%; */
+  width: 100%;
   height: 60%;
   border: 1px solid black;
   border-radius: 10px;

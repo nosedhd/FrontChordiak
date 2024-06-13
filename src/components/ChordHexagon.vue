@@ -4,11 +4,19 @@
   </button>
 </template>
 
+<script setup>
+import { useCounterStore } from '@/stores/counter';
+const store = useCounterStore();
+let globalStoreScale = store.scale;
+let globalStoreTonic = store.tonic;
+</script>
+
+
 <script>
-import axios from 'axios';
-import { useNotesStore } from '../stores/notes';
+import axios from 'axios'
+// import { useNotesStore } from '../stores/notes'
 export default {
-  props: ['number'],
+  props: ['number', 'scale'],
   name: 'ChordHexagon',
   components: {
     // Selectors
@@ -17,27 +25,30 @@ export default {
     return {}
   },
   setup() {
-    const store = useNotesStore();
-    const scaleId = store.scaleId;
-    return {
-      scaleId
-    };
+    // const store = useNotesStore()
+    // const scaleId = store.scaleId
+    // return {
+    //   scaleId
+    // }
   },
   methods: {
-    sendIndex(chordIndex, scaleId){
-      axios.post('http://localhost:5173/global-scales', { chordIndex, scaleId })
-      .then(response => {
-        console.log('chordIndex:', response.chordIndex);
-        console.log('scaleId:', response.scaleId);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    sendIndex() {
+      let globalTonic=globalStoreTonic.valueOf
+      let globalScale=globalStoreScale.valueOf
+      axios.get(`http://localhost:5173/global-scales/${globalTonic}/${globalScale}`)
+        .then((response) => {
+          console.log(response.data)
+          // console.log('chordIndex:', response.chordIndex)
+          // console.log('scaleId:', response.scaleId)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     },
     playSound() {
       const audio = new Audio(`/sounds/${this.number}.wav`)
       audio.play()
-      this.sendIndex(this.number);
+      this.sendIndex()
     }
   },
   mounted() {}
@@ -45,9 +56,6 @@ export default {
 </script>
 
 <style scoped>
-.chord-hexagon-container {
-}
-
 button {
   transform: rotate(45deg);
   color: aliceblue;
