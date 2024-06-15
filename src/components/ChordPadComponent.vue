@@ -26,7 +26,6 @@ import ChordHexagon from './ChordHexagon.vue'
 export default {
   name: 'ChordPadComponent',
   props: {
-    scale: Number
   },
   components: {
     ChordHexagon

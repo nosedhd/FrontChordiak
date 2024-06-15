@@ -33,11 +33,13 @@ export default {
         this.scaleNotes = []
         return
       }
+      let idNotesArray=[];
       const scalePattern = newScale.split(',').map(Number)
       let currentNoteIndex = this.notes.findIndex((note) => note.name === this.tonica.name)
       console.log(scalePattern)
       this.scaleNotes = scalePattern.map((interval) => {
         currentNoteIndex = (currentNoteIndex + interval) % this.notes.length
+        idNotesArray.push(currentNoteIndex)
         return this.notes[currentNoteIndex]
       })
     }

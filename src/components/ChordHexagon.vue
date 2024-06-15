@@ -7,16 +7,18 @@
 <script setup>
 import { useCounterStore } from '@/stores/counter';
 const store = useCounterStore();
-let globalStoreScale = store.scale;
-let globalStoreTonic = store.tonic;
+const {getTonic, getScale} = storeToRefs(store)
+let globalStoreScale = getTonic;
+let globalStoreTonic = getScale;
 </script>
 
 
 <script>
 import axios from 'axios'
+import { storeToRefs } from 'pinia';
 // import { useNotesStore } from '../stores/notes'
 export default {
-  props: ['number', 'scale'],
+  props: ['number'],
   name: 'ChordHexagon',
   components: {
     // Selectors
@@ -33,8 +35,8 @@ export default {
   },
   methods: {
     sendIndex() {
-      let globalTonic=globalStoreTonic.valueOf
-      let globalScale=globalStoreScale.valueOf
+      let globalTonic=globalStoreTonic
+      let globalScale=globalStoreScale
       axios.get(`http://localhost:5173/global-scales/${globalTonic}/${globalScale}`)
         .then((response) => {
           console.log(response.data)
@@ -46,9 +48,14 @@ export default {
         })
     },
     playSound() {
+      
+      
+
+
       const audio = new Audio(`/sounds/${this.number}.wav`)
       audio.play()
-      this.sendIndex()
+      store
+      // this.sendIndex()
     }
   },
   mounted() {}

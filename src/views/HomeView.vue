@@ -9,7 +9,7 @@
             {{ note.name }}
           </option>
         </select>
-        <select name="escala" id="escala" v-model="scale" @change = "getScaleNotes(); updateScale($event.target.selectedIndex)">
+        <select name="escala" id="escala" v-model="scale" @change = "getScaleNotes(); updateScale(scale.intervals)">
           <option disabled value="">Escala</option>
           <option v-for="escala in scales" :key="escala.value" :value="escala">
             {{ escala.name }}
@@ -28,7 +28,7 @@
       <div class="sidebar-container">
         <!-- ScaleList Component -->
         <div class="scale-list-container">
-          <h1>Tónica {{ store.tonic }}</h1>
+          <h1>Tónica </h1>
           <!-- <p>{{ tonica.name }}</p> -->
           <ul>
             <li v-for="note in scaleNotes" :key="note.id">{{ note.name }}</li>

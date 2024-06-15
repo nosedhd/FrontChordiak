@@ -21,6 +21,7 @@
 }
 
 .navbar {
+  top: 0;
   width: 100%;
   background-color: #333;
   color: white;
